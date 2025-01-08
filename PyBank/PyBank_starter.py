@@ -29,7 +29,7 @@ with open(file_to_load) as financial_data:
 
     # Process each row of data
     for row in reader:
-
+        print(row)
         # Track the total
 
 
