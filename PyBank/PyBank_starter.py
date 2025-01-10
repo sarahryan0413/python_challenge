@@ -14,6 +14,7 @@ total_months = 0
 total_net = 0
 # Add more variables to track other necessary financial data
 
+
 # Open and read the csv
 with open(file_to_load) as financial_data:
     reader = csv.reader(financial_data)
@@ -38,9 +39,12 @@ with open(file_to_load) as financial_data:
         total_months += 1  #count that row as 1 month
 
         # Track the net change -- sum the next row to total_net
-        total_net += prior_profit_losses  #add the profit/losses to the total net
+        next_profit_losses = int(row[1]) #create a variable for the next row
+        total_net += next_profit_losses  #add the next profit/losses to the total net
 
         # Calculate the greatest increase in profits (month and amount)
+        if next_profit_losses > prior_profit_losses:
+
 
 
         # Calculate the greatest decrease in losses (month and amount)
