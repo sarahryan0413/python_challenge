@@ -69,20 +69,23 @@ with open(file_to_load) as financial_data:
         prior_profit_losses = next_profit_losses
 
 # Calculate the average net change across the months - divide the average_change by the number of months
-average_change = sum_of_change / total_months
+# Subtract one away from the total month due to this calculation being for the change
+average_change = round(sum_of_change / (total_months - 1), 2)
 
-# Generate the output summary
-
+# Generate the output summary - use the """ for multi-lines and cleaner formatting
+output = f"""
+Financial Analysis
+----------------------------
+Total Months: {total_months}
+Total: ${total_net}
+Average Change: ${average_change}
+Greatest Increase in Profits: {greatest_increase_month} (${greatest_increase_amount})
+Greatest Decrease in Profits: {greatest_decrease_month} (${greatest_decrease_amount})
+"""
 
 # Print the output
-print("Financial Analysis")
-print("----------------------------")
-print(f"Total Months: " + str(total_months))
-print(f"Total: $" + str(total_net))
-print(f"Average Change: $" + str(average_change))
-print(f"Greatest Increase in Profits: " + greatest_increase_month + " " + "($" + str(greatest_increase_amount) + ")")
-print(f"Greatest Decrease in Profits: " + greatest_decrease_month + " " + "($" + str(greatest_decrease_amount) + ")")
+print(output)
 
 # Write the results to a text file
-#with open(file_to_output, "w") as txt_file:
-    #txt_file.write(output)
+with open(file_to_output, "w") as txt_file:
+    txt_file.write(output)
