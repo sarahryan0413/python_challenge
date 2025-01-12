@@ -13,10 +13,12 @@ file_to_output = os.path.join("analysis", "election_analysis.txt")  # Output fil
 total_votes = 0  # Track the total number of votes cast
 
 # Define lists and dictionaries to track candidate names and vote counts
+candidate_list = []
 
 
 # Winning Candidate and Winning Count Tracker
-
+winning_candidate = ""
+winning_count_tracker = 0
 
 # Open the CSV file and process it
 with open(file_to_load) as election_data:
@@ -28,23 +30,25 @@ with open(file_to_load) as election_data:
     # Loop through each row of the dataset and process it
     for row in reader:
 
-        # Print a loading indicator (for large datasets)
+        # Print a loading indicator (for large datasets) - shows the user that the program is working and not frozen
         print(". ", end="")
 
         # Increment the total vote count for each row
-
+        total_votes += 1  #counts each row as 1 vote count
 
         # Get the candidate's name from the row
-
+        candidate_name = row[2]  #candidates name is in the 3 column
 
         # If the candidate is not already in the candidate list, add them
+        if candidate_name not in candidate_list:
+            candidate_list.append(candidate_name)
 
 
         # Add a vote to the candidate's count
 
-
+print(candidate_list)
 # Open a text file to save the output
-with open(file_to_output, "w") as txt_file:
+#with open(file_to_output, "w") as txt_file:
 
     # Print the total vote count (to terminal)
 
