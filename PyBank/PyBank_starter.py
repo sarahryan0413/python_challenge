@@ -20,6 +20,8 @@ greatest_increase_month = ""
 greatest_decrease_amount = 0
 greatest_decrease_month = ""
 
+sum_of_change = 0
+
 # Open and read the csv
 with open(file_to_load) as financial_data:
     reader = csv.reader(financial_data)
@@ -60,9 +62,14 @@ with open(file_to_load) as financial_data:
             greatest_decrease_amount = change  #if the statement above was true, swap it out with the new change
             greatest_decrease_month = row[0]   #if it was true, store that month in greatest decrease month
 
+        # Calculate the average net change across the months - start with adding all of the change together
+        sum_of_change += change
 
-# Calculate the average net change across the months
+        # Update priot to the current row so it's ready for another loop
+        prior_profit_losses = next_profit_losses
 
+# Calculate the average net change across the months - divide the average_change by the number of months
+average_change = sum_of_change / total_months
 
 # Generate the output summary
 
@@ -72,7 +79,7 @@ print("Financial Analysis")
 print("----------------------------")
 print(f"Total Months: " + str(total_months))
 print(f"Total: $" + str(total_net))
-#print(f"Average Change: $" + str(
+print(f"Average Change: $" + str(average_change))
 print(f"Greatest Increase in Profits: " + greatest_increase_month + " " + "($" + str(greatest_increase_amount) + ")")
 print(f"Greatest Decrease in Profits: " + greatest_decrease_month + " " + "($" + str(greatest_decrease_amount) + ")")
 
