@@ -49,29 +49,29 @@ with open(file_to_load) as election_data:
         else:
             candidate_count_dict[candidate_name] = 1  #add the candidate with 1 vote
 
-print(candidate_count_dict)
-
-
 # Open a text file to save the output
-#with open(file_to_output, "w") as txt_file:
+with open(file_to_output, "w") as txt_file:
 
     # Print the total vote count (to terminal)
-
+    print(total_votes)
 
     # Write the total vote count to the text file
-
+    txt_file.write(f"Total Votes: {total_votes}\n")
 
     # Loop through the candidates to determine vote percentages and identify the winner
-
-
+    for candidate_name in candidate_count_dict:
+    
         # Get the vote count and calculate the percentage
-
+        vote_count = candidate_count_dict[candidate_name]
+        vote_percentage = (vote_count / total_votes) * 100
 
         # Update the winning candidate if this one has more votes
-
+        if vote_count > winning_count_tracker:  #compare the vote count to what is currently stored in winning count tracker
+            winning_candidate = candidate_name  #set the candidate's name as winner
+            winning_count_tracker = vote_count  #update the winning count tracker for next loop
 
         # Print and save each candidate's vote count and percentage
-
+        print(f"{candidate_name}: {round(vote_percentage, 3)}% ({vote_count})")
 
     # Generate and print the winning candidate summary
 
