@@ -16,6 +16,8 @@ total_votes = 0  # Track the total number of votes cast
 candidate_names_list = []
 candidate_count_dict = {}
 
+candidate_stats = ""
+
 # Winning Candidate and Winning Count Tracker
 winning_candidate = ""
 winning_count_tracker = 0
@@ -53,7 +55,7 @@ with open(file_to_load) as election_data:
 with open(file_to_output, "w") as txt_file:
 
     # Print the total vote count (to terminal)
-    print(total_votes)
+    #print(f"Total Votes: {total_votes}")
 
     # Write the total vote count to the text file
     txt_file.write(f"Total Votes: {total_votes}\n")
@@ -70,10 +72,23 @@ with open(file_to_output, "w") as txt_file:
             winning_candidate = candidate_name  #set the candidate's name as winner
             winning_count_tracker = vote_count  #update the winning count tracker for next loop
 
-        # Print and save each candidate's vote count and percentage
-        print(f"{candidate_name}: {round(vote_percentage, 3)}% ({vote_count})")
+        # Save each candidate's vote count and percentage 
+        candidate_stats += f"{candidate_name}: {round(vote_percentage, 3)}% ({vote_count})\n"  #add \n for a new line 
 
     # Generate and print the winning candidate summary
+    output = f"""
+    Election Results
+    -------------------------
+    Total Votes: {total_votes}
+    -------------------------
+    {candidate_stats}
+    -------------------------
+    Winner: {winning_candidate}
+    -------------------------
+    """
 
+    print(output)
 
     # Save the winning candidate summary to the text file
+    with open(file_to_output, "w") as txt_file:
+        txt_file.write(output)
