@@ -13,8 +13,8 @@ file_to_output = os.path.join("analysis", "election_analysis.txt")  # Output fil
 total_votes = 0  # Track the total number of votes cast
 
 # Define lists and dictionaries to track candidate names and vote counts
-candidate_list = []
-
+candidate_names_list = []
+candidate_count_dict = {}
 
 # Winning Candidate and Winning Count Tracker
 winning_candidate = ""
@@ -40,13 +40,18 @@ with open(file_to_load) as election_data:
         candidate_name = row[2]  #candidates name is in the 3 column
 
         # If the candidate is not already in the candidate list, add them
-        if candidate_name not in candidate_list:
-            candidate_list.append(candidate_name)
-
+        if candidate_name not in candidate_names_list:
+            candidate_names_list.append(candidate_name)
 
         # Add a vote to the candidate's count
+        if candidate_name in candidate_count_dict:
+            candidate_count_dict[candidate_name] += 1  #add one vote to their count
+        else:
+            candidate_count_dict[candidate_name] = 1  #add the candidate with 1 vote
 
-print(candidate_list)
+print(candidate_count_dict)
+
+
 # Open a text file to save the output
 #with open(file_to_output, "w") as txt_file:
 
