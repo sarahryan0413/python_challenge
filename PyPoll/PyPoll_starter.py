@@ -77,15 +77,14 @@ with open(file_to_output, "w") as txt_file:
 
     # Generate and print the winning candidate summary
     output = f"""
-    Election Results
-    -------------------------
-    Total Votes: {total_votes}
-    -------------------------
-    {candidate_stats}
-    -------------------------
-    Winner: {winning_candidate}
-    -------------------------
-    """
+Election Results
+-------------------------
+Total Votes: {total_votes}    
+-------------------------
+{candidate_stats}-------------------------
+Winner: {winning_candidate}
+-------------------------
+"""
 
     print(output)
 
